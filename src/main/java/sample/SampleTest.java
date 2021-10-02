@@ -20,7 +20,7 @@ public class SampleTest {
         ThreadUtil.spinWait(() -> isDone == true);
 
         executorService.shutdown();
-        executorService.awaitTermination(30, TimeUnit.SECONDS);
+
     }
 
 }

@@ -27,4 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Build
-        run: mvn clean install
+        run: mvn clean compile
+
+      - name: Test
+        run: mvn test

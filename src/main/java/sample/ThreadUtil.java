@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import static java.time.ZonedDateTime.now;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -15,7 +16,6 @@ public class ThreadUtil {
     private static final Logger LOG = LoggerFactory.getLogger(ThreadUtil.class);
 
     /**
-     *
      * @param callable
      * @throws Exception
      */
@@ -24,7 +24,6 @@ public class ThreadUtil {
     }
 
     /**
-     *
      * @param callable
      * @param wait
      * @param timeUnit
@@ -38,7 +37,7 @@ public class ThreadUtil {
         do {
             LOG.trace("Spinning...");
             if (now().toInstant().toEpochMilli() > endTime) {
-                LOG.error("Timed out waiting...");
+                throw new TimeoutException("Timed out waiting...");
             }
         } while ((now().toInstant().toEpochMilli() <= endTime) && (!callable.call()));
     }
